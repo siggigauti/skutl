@@ -1,8 +1,12 @@
 package com.HBV501G.skutl.controller;
 
+import com.HBV501G.skutl.model.Ferd;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.sql.Date;
 
 
 /**
@@ -17,6 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SkutlController {
     @RequestMapping("/")
     public String listSkutlFerdir() {
+        //Þetta home er nafn á html skjali undir resources/templates. Öll html skjöl verða þar.
         return "home";
+    }
+
+    @RequestMapping("/ferd")
+    public String ferdDetails(ModelMap modelMap) {
+        String[] temp = {"Siggi","halli"};
+        Ferd ferd = new Ferd(1, Date.valueOf("2015-05-06"),Date.valueOf("2015-05-06"), "Jón", temp, "RVK", "AK", 4, 4000 );
+        modelMap.put("ferd", ferd);
+        return "ferd-details";
     }
 }
