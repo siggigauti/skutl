@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>List of all rides</title>
+</head>
+<body>
+    <ul th:each="ferd : ${ferdir}">
+        <a th:href="@{'/from/'+${ferd.ferdId}}"><li th:text="'Farið frá ' + ${ferd.departureLocation} + ' til ' + ${ferd.arrivalLocation}"></li></a>
+    </ul>
+</body>
+</html>

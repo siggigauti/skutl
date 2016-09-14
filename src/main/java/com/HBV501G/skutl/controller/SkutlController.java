@@ -1,12 +1,16 @@
 package com.HBV501G.skutl.controller;
 
+import com.HBV501G.skutl.data.FerdRepository;
 import com.HBV501G.skutl.model.Ferd;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Date;
+import java.util.List;
 
 
 /**
@@ -19,16 +23,21 @@ import java.sql.Date;
 //Þessi controller er fyrir display á öllum skult ferðum í gangi og Main page.
 @Controller
 public class SkutlController {
+
+    @Autowired
+    private FerdRepository ferdRepository;
+
     @RequestMapping("/")
-    public String listSkutlFerdir() {
+    public String listSkutlFerdir(ModelMap modelMap) {
         //Þetta home er nafn á html skjali undir resources/templates. Öll html skjöl verða þar.
-        return "home";
+        List<Ferd> allFerdir = ferdRepository.getAllFerdir();
+        modelMap.put("ferdir",allFerdir);
+        return "allFerdir";
     }
 
-    @RequestMapping("/ferd")
-    public String ferdDetails(ModelMap modelMap) {
-        String[] temp = {"Siggi","halli"};
-        Ferd ferd = new Ferd(1, Date.valueOf("2015-05-06"),Date.valueOf("2015-05-06"), "Jón", temp, "RVK", "AK", 4, 4000 );
+    @RequestMapping("/from/{id}")
+    public String ferdDetails(@PathVariable int id, ModelMap modelMap) {
+        Ferd ferd = ferdRepository.findById(id);
         modelMap.put("ferd", ferd);
         return "ferd-details";
     }

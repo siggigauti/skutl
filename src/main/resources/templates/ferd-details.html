@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-    <p th:text="${ferd.ferdId}">Ætti að vera 1</p>
+    <p th:text="${ferd.ferdId}">some ID</p>
+    <p th:text="'We will be departing from ' + ${ferd.departureLocation}"></p>
 </body>
 </html>
