@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>List of all rides</title>
+    <!--/*/ <th:block th:include="fragments/testTemplate :: head"></th:block> /*/-->
 </head>
 <body>
+<!--/*/ <th:block th:include="fragments/menubar :: header"></th:block> /*/-->
     <ul th:each="ferd : ${ferdir}">
         <a th:href="@{'/from/'+${ferd.ferdId}}"><li th:text="'Farið frá ' + ${ferd.departureLocation} + ' til ' + ${ferd.arrivalLocation}"></li></a>
     </ul>
